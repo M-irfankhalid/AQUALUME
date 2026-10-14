@@ -5,8 +5,8 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { INTRO_DONE } from "@/lib/intro";
 
 /**
- * The opening curtain: a counting progress readout on the abyss, then the whole
- * panel lifts away to reveal the hero.
+ * The opening curtain: a counting progress readout over the water surface, then
+ * the whole panel lifts away to reveal the hero.
  *
  * Scroll is locked while it runs, and it removes itself from the DOM entirely
  * once finished so it can never trap focus or intercept a click.
@@ -73,7 +73,7 @@ export default function Preloader() {
     <div
       id="aqualume-preloader"
       ref={rootRef}
-      className="fixed inset-0 z-[200] flex flex-col justify-between bg-abyss px-6 py-8 sm:px-10 sm:py-10"
+      className="fixed inset-0 z-[200] flex flex-col justify-between bg-background px-6 py-8 sm:px-10 sm:py-10"
     >
       {/* If JavaScript never runs, the curtain must not become a wall. */}
       <noscript>
@@ -99,9 +99,9 @@ export default function Preloader() {
         </div>
       </div>
 
-      {/* Progress hairline pinned to the bottom edge */}
-      <div className="absolute bottom-0 left-0 h-px w-full bg-border">
-        <div ref={barRef} className="h-full w-full origin-left bg-primary" />
+      {/* Progress track pinned to the bottom edge */}
+      <div className="absolute bottom-0 left-0 h-1 w-full rounded-full bg-surface-2">
+        <div ref={barRef} className="h-full w-full origin-left rounded-full bg-primary" />
       </div>
     </div>
   );

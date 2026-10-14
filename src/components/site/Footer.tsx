@@ -16,15 +16,22 @@ const elsewhere = [
   { label: "Newsletter", href: "#" },
 ];
 
+/**
+ * The deepest tonal step on the page — no rule across the top, the colour shift
+ * does the separating.
+ *
+ * Text here uses `muted` rather than `faint`: on the `shallow` ground, `faint`
+ * drops below 4.5:1 and this is all small type.
+ */
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border bg-abyss">
+    <footer className="bg-shallow">
       <div className="container py-20">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="display mb-4 text-3xl text-foreground">
               Aqualume
-              <span className="serif-accent ml-2 text-primary-light">Foundation</span>
+              <span className="serif-accent ml-2 text-primary-deep">Foundation</span>
             </p>
             <p className="max-w-sm text-sm leading-relaxed text-muted">
               Water points built to still be running in ten years &mdash; with the
@@ -33,13 +40,13 @@ export default function Footer() {
           </div>
 
           <nav className="lg:col-span-3" aria-label="Sections">
-            <h2 className="eyebrow mb-6 text-faint">Explore</h2>
+            <h2 className="eyebrow mb-6 text-primary-deep">Explore</h2>
             <ul className="space-y-3">
               {explore.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-sm text-muted transition-colors hover:text-primary-light"
+                    className="text-sm text-muted transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </Link>
@@ -49,13 +56,13 @@ export default function Footer() {
           </nav>
 
           <div className="lg:col-span-2">
-            <h2 className="eyebrow mb-6 text-faint">Elsewhere</h2>
+            <h2 className="eyebrow mb-6 text-primary-deep">Elsewhere</h2>
             <ul className="space-y-3">
               {elsewhere.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-sm text-muted transition-colors hover:text-primary-light"
+                    className="text-sm text-muted transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </Link>
@@ -65,10 +72,10 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="eyebrow mb-6 text-faint">Giving</h2>
+            <h2 className="eyebrow mb-6 text-primary-deep">Giving</h2>
             <Link
               href="/donate"
-              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary-light transition-colors hover:text-foreground"
+              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors hover:text-primary-deep"
             >
               Real charities
               <IconArrowUpRight
@@ -80,7 +87,7 @@ export default function Footer() {
         </div>
 
         {/* The honest bit — stated plainly, not buried. */}
-        <div className="mt-16 rounded-xl border border-border bg-surface/60 p-6">
+        <div className="mt-16 rounded-2xl bg-white p-6 shadow-soft">
           <p className="text-xs leading-relaxed text-muted">
             <strong className="font-semibold text-foreground">
               This is a demonstration site.
@@ -92,7 +99,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-border pt-8 text-xs text-faint sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {new Date().getFullYear()} Aqualume Foundation &mdash; a fictional entity.</p>
           <p>
             Designed &amp; developed by{" "}
@@ -100,7 +107,7 @@ export default function Footer() {
               href="https://irfankhalid.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-primary-light transition-colors hover:text-foreground"
+              className="font-semibold text-primary-deep transition-colors hover:text-foreground"
             >
               irfankhalid.com
             </a>

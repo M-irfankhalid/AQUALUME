@@ -102,11 +102,11 @@ export default function Cursor() {
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[110] hidden lg:block">
       <div
         ref={ringRef}
-        className="absolute left-0 top-0 h-8 w-8 rounded-full border border-primary/60 opacity-0 transition-opacity duration-300 will-change-transform"
+        className="absolute left-0 top-0 h-8 w-8 rounded-full border border-primary/50 opacity-0 transition-opacity duration-300 will-change-transform"
       />
       <div
         ref={dotRef}
-        className="absolute left-0 top-0 h-1.5 w-1.5 rounded-full bg-primary-light opacity-0 transition-opacity duration-300 will-change-transform"
+        className="absolute left-0 top-0 h-1.5 w-1.5 rounded-full bg-primary-deep opacity-0 transition-opacity duration-300 will-change-transform"
       />
     </div>
   );

@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Aqualume Foundation — deep-water design system
+   Aqualume Foundation — light water-surface design system
    Tailwind v4: all configuration lives in this @theme block.
    There is no tailwind.config.js and there must not be one.
+
+   The organising idea: this palette has no borders. Everything
+   that needs separating is separated by a tonal step, a soft
+   shadow, or a gradient mask. See --shadow-* below.
    ============================================================ */
 
 @theme {
@@ -11,28 +15,29 @@
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
 
-  /* Depth scale — the site is entirely dark, so "dark" tones are the page itself */
-  --color-abyss: #020a09;
-  --color-background: #04120f;
-  --color-surface: #071c18;
-  --color-surface-2: #0a2721;
+  /* Water surface — sections step down this scale instead of drawing lines */
+  --color-background: #fafcfb;
+  --color-surface: #f1f7f5;
+  --color-surface-2: #e6f1ee;
+  --color-shallow: #d8ebe6;
 
-  /* Type */
-  --color-foreground: #e9f6f3;
-  --color-muted: #7fa39c;
-  --color-faint: #4d6b66;
+  /* Ink — deep teal rather than black, so text sits in the same family as water */
+  --color-foreground: #06231f;
+  --color-muted: #4a6b65;
+  --color-faint: #5a7570; /* cleared against `surface`, not just `background` */
 
-  --color-border: #12352e;
-  --color-border-hover: #1d4c43;
+  /* Teal */
+  --color-primary: #0d9488;
+  --color-primary-deep: #0f766e; /* the only teal safe for small text on light */
 
-  /* Accents */
-  --color-primary: #14b8a6;
-  --color-primary-hover: #0d9488;
-  --color-primary-light: #5eead4;
-  --color-accent: #f59e0b;
+  /* Warm — one beat, on the middle field note. Amber cannot carry weight on a
+     light ground, so this is a burnt orange and it is used sparingly. */
+  --color-accent: #c2410c;
 
-  --color-dark: #020a09;
-  --color-dark-2: #071c18;
+  /* Elevation. This is what replaces every border on the site. */
+  --shadow-soft: 0 1px 2px rgba(6, 35, 31, 0.04), 0 12px 32px -12px rgba(6, 35, 31, 0.1);
+  --shadow-lift: 0 2px 4px rgba(6, 35, 31, 0.05), 0 28px 56px -20px rgba(6, 35, 31, 0.16);
+  --shadow-glow: 0 18px 40px -18px rgba(13, 148, 136, 0.32);
 }
 
 /* ===== Base ===== */
@@ -55,7 +60,13 @@ body {
 
 ::selection {
   background: var(--color-primary);
-  color: var(--color-abyss);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* Anchored sections must clear the fixed nav */
@@ -122,8 +133,22 @@ html.lenis body {
   will-change: transform;
 }
 
+/* ===== Edge mask =====
+   Fades a band out at both ends. Used where a rule would otherwise be needed. */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
 /* ===== Grain =====
-   An animated film-grain layer. Generated, never an image file. */
+   An animated film-grain layer. Generated, never an image file.
+   Multiply on a light ground reads as paper stock; soft-light would wash out. */
 @keyframes grain-shift {
   0%, 100% { transform: translate(0, 0); }
   10% { transform: translate(-5%, -10%); }
@@ -148,11 +173,6 @@ html.lenis body {
 }
 .animate-marquee {
   animation: marquee 40s linear infinite;
-}
-
-/* ===== Hairline rules ===== */
-.hairline {
-  border-color: var(--color-border);
 }
 
 /* ===== Custom cursor =====

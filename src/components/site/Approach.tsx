@@ -37,9 +37,9 @@ export default function Approach() {
   return (
     <section id="approach" className="py-28 sm:py-36">
       <div className="container">
-        <div className="mb-20 max-w-3xl">
+        <div className="mb-16 max-w-3xl">
           <Reveal>
-            <p className="eyebrow mb-8 text-primary-light">Our approach</p>
+            <p className="eyebrow mb-8 text-primary-deep">Our approach</p>
           </Reveal>
           <MaskedHeading
             lines={["Four principles,", "all of them boring"]}
@@ -47,15 +47,17 @@ export default function Approach() {
           />
         </div>
 
-        <div className="border-t border-border">
+        {/* Rows, not a table. Each one lifts into its own soft card on hover
+            instead of being fenced off by a rule. */}
+        <div className="flex flex-col gap-2">
           {principles.map((item, i) => (
             <Reveal key={item.index} y={24} delay={i * 0.05}>
-              <div className="group grid items-start gap-6 border-b border-border py-10 transition-colors duration-500 hover:bg-surface/50 lg:grid-cols-12 lg:gap-10">
+              <div className="group -mx-6 grid items-start gap-5 rounded-2xl px-6 py-7 transition-all duration-500 hover:bg-white hover:shadow-soft lg:grid-cols-12 lg:gap-10">
                 <span className="font-display text-sm tabular-nums text-faint lg:col-span-1">
                   {item.index}
                 </span>
 
-                <h3 className="display text-2xl text-foreground transition-colors duration-300 group-hover:text-primary-light lg:col-span-4 lg:text-3xl">
+                <h3 className="display text-2xl text-foreground transition-colors duration-300 group-hover:text-primary-deep lg:col-span-4 lg:text-3xl">
                   {item.title}
                 </h3>
 

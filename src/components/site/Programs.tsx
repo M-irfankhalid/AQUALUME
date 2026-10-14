@@ -49,12 +49,12 @@ const programs = [
 
 export default function Programs() {
   return (
-    <section id="programs" className="py-28 sm:py-36">
+    <section id="programs" className="bg-surface py-28 sm:py-36">
       <div className="container">
-        <div className="mb-20 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="eyebrow mb-8 text-primary-light">Programs</p>
+              <p className="eyebrow mb-8 text-primary-deep">Programs</p>
             </Reveal>
             <MaskedHeading
               lines={["What we build,", "and what we hand over"]}
@@ -69,15 +69,15 @@ export default function Programs() {
           </Reveal>
         </div>
 
-        <div className="border-t border-border">
+        <div className="flex flex-col gap-2">
           {programs.map((program, i) => (
             <Reveal key={program.index} y={24} delay={i * 0.04}>
-              <div className="group grid items-start gap-5 border-b border-border py-9 transition-colors duration-500 hover:bg-surface/50 lg:grid-cols-12 lg:gap-10">
+              <div className="group -mx-6 grid items-start gap-5 rounded-2xl px-6 py-7 transition-all duration-500 hover:bg-white hover:shadow-soft lg:grid-cols-12 lg:gap-10">
                 <span className="font-display text-sm tabular-nums text-faint lg:col-span-1">
                   {program.index}
                 </span>
 
-                <h3 className="display flex items-center gap-3 text-2xl text-foreground transition-colors duration-300 group-hover:text-primary-light lg:col-span-4 lg:text-3xl">
+                <h3 className="display flex items-center gap-3 text-2xl text-foreground transition-colors duration-300 group-hover:text-primary-deep lg:col-span-4 lg:text-3xl">
                   <span className="text-faint transition-colors duration-300 group-hover:text-primary">
                     {program.icon}
                   </span>

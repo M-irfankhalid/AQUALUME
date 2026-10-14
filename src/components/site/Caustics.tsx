@@ -11,13 +11,18 @@ import { prefersReducedMotion } from "@/lib/gsap";
  * organic underwater light — and costs a few thousand sin() calls per frame
  * rather than a per-pixel shader or a megabyte of video.
  *
+ * The ramp runs pale-to-white: troughs sit just below the page background and
+ * the interference ridges bloom to pure white. That is sunlight refracting
+ * across the floor of a clear pool, and it is why this reads as a water surface
+ * rather than as bioluminescence in the dark.
+ *
  * There is no image file behind this. Nothing here can 404, and nothing here
  * carries a licence.
  */
 
-const DEEP: [number, number, number] = [4, 18, 15]; // abyss
-const MID: [number, number, number] = [13, 148, 136]; // teal-600
-const BRIGHT: [number, number, number] = [94, 234, 212]; // teal-300
+const DEEP: [number, number, number] = [216, 238, 233]; // trough, a hair off background
+const MID: [number, number, number] = [176, 220, 211]; // mid-water
+const BRIGHT: [number, number, number] = [255, 255, 255]; // focused filament
 
 const FIELD_WIDTH = 150; // internal render width; CSS does the upscaling
 

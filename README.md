@@ -42,32 +42,34 @@ One page, read top to bottom:
 
 ## 🎨 Design System
 
-The whole site is dark — the palette is a depth scale rather than a light/dark pair.
+A light water surface. The organising rule is that **the site has no borders** — everything that needs separating is separated by a tonal step, a soft shadow, or a gradient mask.
 
 | Token | Value | Usage |
 |---|---|---|
-| `abyss` | `#020a09` | Deepest ground |
-| `background` | `#04120f` | Page |
-| `surface` | `#071c18` | Cards |
-| `surface-2` | `#0a2721` | Raised cards |
-| `foreground` | `#e9f6f3` | Primary text |
-| `muted` | `#7fa39c` | Body text |
-| `faint` | `#4d6b66` | Meta text |
-| `primary` | `#14b8a6` | Teal — accents, rules |
-| `primary-light` | `#5eead4` | Teal for text on dark |
-| `accent` | `#f59e0b` | Amber — the Donate path only |
+| `background` | `#fafcfb` | Page — barely-teal white |
+| `surface` | `#f1f7f5` | Tonal band |
+| `surface-2` | `#e6f1ee` | Deeper band |
+| `shallow` | `#d8ebe6` | Deepest step (footer) |
+| `foreground` | `#06231f` | Deep teal, not black |
+| `muted` | `#4a6b65` | Body text |
+| `faint` | `#5f7a74` | Meta text |
+| `primary` | `#0d9488` | Teal — fills, icons, rules |
+| `primary-deep` | `#0f766e` | The only teal safe for small text |
+| `accent` | `#c2410c` | Burnt orange, used sparingly |
 
-Two contrast rules are load-bearing: `primary` is never used for text on dark (it lands near 2:1), and anything sitting on `accent` uses `text-dark`.
+Elevation replaces line work, via three `@theme` shadow tokens: `shadow-soft` (resting cards), `shadow-lift` (hover), `shadow-glow` (the teal CTA).
+
+Two contrast rules are load-bearing: **`primary` is never used for small text** (it lands near 3.6:1 on this ground — `primary-deep` is the text-safe teal), and **amber is gone from the CTA entirely**, because `#f59e0b` on a light ground is about 2:1. The Donate path is deep teal with white type.
 
 ---
 
-## 🌊 No photography
+## 🌊 No photography, no borders
 
 There is not a single image file in this project. Everything visual is computed at runtime:
 
-- **`Caustics.tsx`** — a 2D canvas sine-interference field evaluated at 150px wide and CSS-upscaled under a blur. Thin bright ridges come from `Math.pow(1 - Math.abs(v), 7)`.
-- **`Grain.tsx`** — SVG `feTurbulence` film grain, `mix-blend-soft-light`.
-- **Field-note cards** — layered CSS gradients and a repeating hairline.
+- **`Caustics.tsx`** — a 2D canvas sine-interference field evaluated at 150px wide and CSS-upscaled under a blur. Thin bright ridges come from `Math.pow(1 - Math.abs(v), 7)`. The ramp runs pale-to-white, so the troughs sit just below the page background and the ridges bloom to pure white: sunlight refracting across the floor of a clear pool.
+- **`Grain.tsx`** — SVG `feTurbulence` film grain, multiplied rather than soft-lit, so it reads as paper stock instead of washing the page out.
+- **Field-note cards** — layered CSS gradients and a repeating tint.
 
 Both canvas components pause when off-screen or when the tab is hidden, and render a single static frame under `prefers-reduced-motion`.
 
@@ -110,6 +112,7 @@ src/
 - **`prefers-reduced-motion` short-circuits to the final state** rather than skipping the animation, so nothing is ever left mid-transform. Lenis, the cursor and the preloader all bail out entirely.
 - **The custom cursor only engages on a fine pointer**, and the native one is never hidden otherwise.
 - **Headings pass their lines in as an authored array** rather than being split at runtime, so they hold at every viewport and across font swaps.
+- **Body and meta text clear 4.5:1** against the surface it sits on — which is why `faint` is not used in the footer, where the ground is deepest.
 
 ---
 

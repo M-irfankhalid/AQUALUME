@@ -5,7 +5,7 @@ export default function Manifesto() {
     <section className="py-28 sm:py-36">
       <div className="container">
         <Reveal>
-          <p className="eyebrow mb-12 text-primary-light">The problem</p>
+          <p className="eyebrow mb-12 text-primary-deep">The problem</p>
         </Reveal>
 
         <ScrollWords

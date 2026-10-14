@@ -10,6 +10,8 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
  * This uses CSS `position: sticky` for the hold and ScrollTrigger only for the
  * scrubbed tween. ScrollTrigger's own pinning is more fragile here — it breaks
  * when an ancestor gains a transform, and it fights resize.
+ *
+ * Separation is a tonal gradient rather than a rule at either end.
  */
 export default function Crisis() {
   const rootRef = useRef<HTMLElement>(null);
@@ -56,15 +58,16 @@ export default function Crisis() {
 
   return (
     <section ref={rootRef} className="relative h-[220vh]">
-      <div className="sticky top-0 flex h-svh items-center overflow-hidden bg-gradient-to-b from-abyss via-surface to-abyss">
+      <div className="sticky top-0 flex h-svh items-center overflow-hidden bg-gradient-to-b from-background via-surface-2 to-background">
         <div className="container text-center">
-          <p className="eyebrow mb-10 text-primary-light">The sector&apos;s blind spot</p>
+          <p className="eyebrow mb-10 text-primary-deep">The sector&apos;s blind spot</p>
 
           <p className="crisis-number display-tight text-[clamp(5rem,26vw,22rem)] leading-[0.8] text-foreground">
             1 in 3
           </p>
 
-          <div className="crisis-rule mx-auto my-12 h-px w-40 origin-center bg-primary" />
+          {/* A gradient, not a rule — it dissolves at both ends */}
+          <div className="crisis-rule mx-auto my-12 h-px w-48 origin-center bg-gradient-to-r from-transparent via-primary to-transparent" />
 
           <p className="crisis-caption mx-auto max-w-xl text-lg leading-relaxed text-muted">
             hand pumps across rural sub-Saharan Africa are estimated to be out of action

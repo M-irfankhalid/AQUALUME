@@ -5,33 +5,29 @@ import { IconInfoCircle } from "@tabler/icons-react";
  *
  * Required anywhere the page talks about giving money or time — the plan for
  * this build makes it mandatory next to every donation CTA, not just in the
- * footer. The site is entirely dark, so both tones sit on deep surfaces;
- * `tone="dark"` is the louder treatment for use over the caustic bands.
+ * footer. `tone="raised"` lifts it onto white for use on the tinted bands;
+ * the default sits flush on the page.
  */
 export default function DemoNotice({
-  tone = "light",
+  tone = "flat",
   className = "",
 }: {
-  tone?: "light" | "dark";
+  tone?: "flat" | "raised";
   className?: string;
 }) {
   const toneClasses =
-    tone === "dark"
-      ? "border-primary/30 bg-surface-2 text-muted"
-      : "border-border bg-surface-2/70 text-muted";
-
-  const iconClasses = tone === "dark" ? "text-primary-light" : "text-primary";
+    tone === "raised" ? "bg-white shadow-soft" : "bg-surface-2";
 
   return (
     <p
-      className={`inline-flex max-w-2xl items-start gap-2.5 rounded-xl border px-4 py-3.5 text-xs leading-relaxed ${toneClasses} ${className}`}
+      className={`inline-flex max-w-2xl items-start gap-3 rounded-2xl px-5 py-4 text-xs leading-relaxed text-muted ${toneClasses} ${className}`}
     >
-      <IconInfoCircle size={15} className={`mt-0.5 shrink-0 ${iconClasses}`} />
+      <IconInfoCircle size={16} className="mt-0.5 shrink-0 text-primary" />
       <span>
-        <strong className="font-semibold">Demo site.</strong> Aqualume Foundation is a
-        fictional organisation built for a portfolio. It is not a registered charity and
-        it cannot accept money &mdash; donations on this page go directly to real,
-        independent organisations on their own websites.
+        <strong className="font-semibold text-foreground">Demo site.</strong> Aqualume
+        Foundation is a fictional organisation built for a portfolio. It is not a
+        registered charity and it cannot accept money &mdash; donations on this page go
+        directly to real, independent organisations on their own websites.
       </span>
     </p>
   );

@@ -75,23 +75,24 @@ export default function Hero() {
     >
       {/* Generative water light — no image file behind this */}
       <Caustics
-        className="pointer-events-none absolute inset-0 h-full w-full scale-110 blur-[34px]"
-        opacity={0.62}
+        className="pointer-events-none absolute inset-0 h-full w-full scale-110 blur-[30px]"
+        opacity={0.85}
       />
 
-      {/* Vignette keeps the type legible over the brightest filaments */}
+      {/* Fades the field out toward the edges so it never ends in a hard seam */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(130%_90%_at_50%_8%,transparent_0%,rgba(2,10,9,0.6)_52%,rgba(2,10,9,0.96)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_0%,transparent_0%,rgba(250,252,251,0.4)_48%,rgba(250,252,251,0.94)_100%)]"
       />
+      {/* A calmer wash where the type sits, so the headline never fights the light */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-abyss to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/85 to-transparent"
       />
 
       <div className="container relative z-10 pb-24 pt-36">
         <div className="hero-parallax">
-          <p className="hero-fade eyebrow mb-8 text-primary-light">
+          <p className="hero-fade eyebrow mb-8 text-primary-deep">
             Aqualume Foundation &middot; Water &amp; Sanitation
           </p>
 
@@ -104,13 +105,13 @@ export default function Hero() {
             </span>
             <span className="line-mask hero-line">
               <span>
-                safe <em className="serif-accent text-primary-light">water</em>
+                safe <em className="serif-accent text-primary-deep">water</em>
               </span>
             </span>
           </h1>
 
-          <div className="mt-12 grid gap-10 border-t border-border pt-10 lg:grid-cols-12">
-            <div className="hero-fade lg:col-span-5">
+          <div className="hero-fade mt-14 grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
               <p className="max-w-md text-lg leading-relaxed text-muted">
                 We build water systems designed for their tenth year, not their launch
                 day &mdash; local committees, funded repairs, and field teams who go back
@@ -121,17 +122,17 @@ export default function Hero() {
               </p>
             </div>
 
-            <div className="hero-fade lg:col-span-4 lg:col-start-7">
-              <div className="flex flex-wrap gap-4">
+            <div className="lg:col-span-4 lg:col-start-7">
+              <div className="flex flex-wrap gap-3">
                 <a
                   href="#give"
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-4 text-sm font-bold uppercase tracking-wide text-abyss transition-colors hover:bg-amber-400"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary-deep px-7 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary"
                 >
                   Where to actually give
                 </a>
                 <a
                   href="#approach"
-                  className="inline-flex items-center gap-2 rounded-full border border-border-hover px-7 py-4 text-sm font-bold uppercase tracking-wide text-foreground transition-colors hover:border-primary hover:text-primary-light"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-sm font-bold uppercase tracking-wide text-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:text-primary-deep"
                 >
                   Our approach
                 </a>
@@ -149,7 +150,7 @@ export default function Hero() {
       {/* Scroll cue */}
       <div className="absolute bottom-8 right-6 hidden flex-col items-center gap-3 lg:flex">
         <span className="eyebrow [writing-mode:vertical-rl] text-faint">Scroll</span>
-        <span className="relative h-16 w-px overflow-hidden bg-border">
+        <span className="relative h-16 w-px overflow-hidden rounded-full bg-surface-2">
           <span className="animate-scroll-pulse absolute inset-x-0 h-1/2 bg-primary" />
         </span>
       </div>

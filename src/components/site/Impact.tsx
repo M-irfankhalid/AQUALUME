@@ -15,26 +15,29 @@ const fieldNotes = [
   {
     index: "01",
     kicker: "Maintenance",
+    kickerClass: "text-primary-deep",
     title: "The repair fund",
     body: "Every water point opens with money already set aside for its first failure. It is small, it is boring, and it is the single reason a pump is still running in year ten.",
     surface:
-      "radial-gradient(120% 80% at 20% 0%, rgba(20,184,166,0.38), transparent 62%), linear-gradient(160deg, #0a2721, #04120f)",
+      "radial-gradient(120% 80% at 20% 0%, rgba(13,148,136,0.18), transparent 62%), linear-gradient(160deg, #e9f6f3, #f9fcfb)",
   },
   {
     index: "02",
     kicker: "Monitoring",
+    kickerClass: "text-accent",
     title: "The sensor",
     body: "Flow sensors report daily. When a pump goes quiet the alert reaches a local technician before it reaches a donor report, which is the only ordering that matters.",
     surface:
-      "radial-gradient(100% 70% at 82% 8%, rgba(245,158,11,0.24), transparent 62%), linear-gradient(160deg, #0a2721, #04120f)",
+      "radial-gradient(100% 70% at 82% 8%, rgba(194,65,12,0.12), transparent 62%), linear-gradient(160deg, #fdf4ee, #fcfbfa)",
   },
   {
     index: "03",
     kicker: "Ownership",
+    kickerClass: "text-primary-deep",
     title: "The committee",
     body: "Nine people from the village, trained and elected, holding the spare parts and the ledger. We are guests at that table, and eventually we stop attending it.",
     surface:
-      "radial-gradient(115% 78% at 50% 104%, rgba(94,234,212,0.28), transparent 62%), linear-gradient(160deg, #071c18, #020a09)",
+      "radial-gradient(115% 78% at 50% 104%, rgba(94,234,212,0.34), transparent 62%), linear-gradient(160deg, #e7f6f4, #fafcfc)",
   },
 ];
 
@@ -78,9 +81,9 @@ export default function Impact() {
   return (
     <section id="impact" className="py-28 sm:py-36">
       <div className="container">
-        <div className="mb-20 max-w-3xl">
+        <div className="mb-16 max-w-3xl">
           <Reveal>
-            <p className="eyebrow mb-8 text-primary-light">Impact</p>
+            <p className="eyebrow mb-8 text-primary-deep">Impact</p>
           </Reveal>
           <MaskedHeading
             lines={["Counted at the tap,", "not in the press release"]}
@@ -88,11 +91,12 @@ export default function Impact() {
           />
         </div>
 
-        <dl className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+        {/* Four cards floating on the page rather than a ruled grid */}
+        <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => (
-            <Reveal key={stat.label} y={20} delay={i * 0.06} className="h-full bg-background">
-              <div className="flex h-full flex-col justify-between gap-8 p-8">
-                <dd className="display-tight text-[clamp(2.6rem,5vw,4rem)] tabular-nums text-primary-light">
+            <Reveal key={stat.label} y={20} delay={i * 0.06} className="h-full">
+              <div className="flex h-full flex-col justify-between gap-8 rounded-2xl bg-white p-8 shadow-soft transition-shadow duration-500 hover:shadow-lift">
+                <dd className="display-tight text-[clamp(2.6rem,5vw,4rem)] tabular-nums text-primary-deep">
                   <Counter value={stat.value} suffix={stat.suffix} />
                 </dd>
                 <dt>
@@ -108,13 +112,13 @@ export default function Impact() {
 
         <div className="mt-24">
           <Reveal>
-            <p className="eyebrow mb-10 text-primary-light">Field notes</p>
+            <p className="eyebrow mb-10 text-primary-deep">Field notes</p>
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-3">
             {fieldNotes.map((note, i) => (
-              <Reveal key={note.index} y={34} delay={i * 0.08}>
-                <article className="group relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-2xl border border-border p-8 transition-colors duration-500 hover:border-primary">
+              <Reveal key={note.index} y={34} delay={i * 0.08} className="h-full">
+                <article className="group relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-2xl p-8 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
                   {/* Generated surface — gradients and hairlines, no photograph. */}
                   <div
                     aria-hidden
@@ -126,12 +130,12 @@ export default function Impact() {
                     className="absolute inset-0 opacity-60 transition-opacity duration-700 group-hover:opacity-100"
                     style={{
                       backgroundImage:
-                        "repeating-linear-gradient(90deg, rgba(94,234,212,0.07) 0 1px, transparent 1px 15px)",
+                        "repeating-linear-gradient(90deg, rgba(13,148,136,0.07) 0 1px, transparent 1px 15px)",
                     }}
                   />
 
                   <div className="relative flex items-start justify-between">
-                    <p className="eyebrow text-primary-light">{note.kicker}</p>
+                    <p className={`eyebrow ${note.kickerClass}`}>{note.kicker}</p>
                     <span className="font-display text-sm tabular-nums text-faint">
                       {note.index}
                     </span>

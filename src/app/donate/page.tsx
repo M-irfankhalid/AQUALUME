@@ -24,15 +24,15 @@ export default function DonatePage() {
       {/* Lead */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-          <Caustics className="absolute inset-0 h-full w-full opacity-30 blur-[54px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
+          <Caustics className="absolute inset-0 h-full w-full opacity-55 blur-[46px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
         </div>
 
         <div className="container">
           <Reveal>
             <Link
               href="/"
-              className="group mb-12 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-faint transition-colors hover:text-primary-light"
+              className="group mb-12 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted shadow-soft transition-colors hover:text-primary-deep"
             >
               <IconArrowLeft
                 size={15}
@@ -44,7 +44,7 @@ export default function DonatePage() {
 
           <div className="max-w-4xl">
             <Reveal>
-              <p className="eyebrow mb-8 text-primary-light">Giving notes</p>
+              <p className="eyebrow mb-8 text-primary-deep">Giving notes</p>
             </Reveal>
             <MaskedHeading
               lines={["There is nothing", "here to donate to"]}
@@ -106,8 +106,8 @@ export default function DonatePage() {
           </div>
 
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="rounded-2xl border border-border bg-surface p-8">
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-surface-2 text-primary-light">
+            <div className="rounded-2xl bg-white p-8 shadow-soft">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-surface-2 text-primary-deep">
                 <IconShieldCheck size={22} />
               </div>
 
@@ -149,46 +149,48 @@ export default function DonatePage() {
       </section>
 
       {/* The directory */}
-      <section className="container mt-28">
-        <div className="mb-16 max-w-3xl">
-          <Reveal>
-            <p className="eyebrow mb-8 text-primary-light">The directory</p>
-          </Reveal>
-          <MaskedHeading
-            lines={["Six real", "organisations"]}
-            className="display text-[clamp(2rem,5vw,4rem)] text-foreground"
-          />
-          <Reveal delay={0.1}>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
-              Five work internationally and one works inside the United States. Every
-              button below opens the organisation&apos;s own donation page in a new tab.
+      <section className="mt-28 bg-surface py-24">
+        <div className="container">
+          <div className="mb-14 max-w-3xl">
+            <Reveal>
+              <p className="eyebrow mb-8 text-primary-deep">The directory</p>
+            </Reveal>
+            <MaskedHeading
+              lines={["Six real", "organisations"]}
+              className="display text-[clamp(2rem,5vw,4rem)] text-foreground"
+            />
+            <Reveal delay={0.1}>
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
+                Five work internationally and one works inside the United States. Every
+                button below opens the organisation&apos;s own donation page in a new tab.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {charities.map((charity, i) => (
+              <Reveal key={charity.name} y={30} delay={(i % 3) * 0.07} className="h-full">
+                <CharityCard charity={charity} />
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal className="mt-10">
+            <p className="flex items-start gap-2 text-xs leading-relaxed text-faint">
+              <IconExternalLink size={14} className="mt-0.5 shrink-0" />
+              <span>
+                These links leave this site. Aqualume Foundation receives nothing from
+                them and has no relationship with these organisations.
+              </span>
             </p>
           </Reveal>
         </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {charities.map((charity, i) => (
-            <Reveal key={charity.name} y={30} delay={(i % 3) * 0.07}>
-              <CharityCard charity={charity} />
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-10">
-          <p className="flex items-start gap-2 text-xs leading-relaxed text-faint">
-            <IconExternalLink size={14} className="mt-0.5 shrink-0" />
-            <span>
-              These links leave this site. Aqualume Foundation receives nothing from them
-              and has no relationship with these organisations.
-            </span>
-          </p>
-        </Reveal>
       </section>
 
       {/* Close */}
       <section className="container mt-28">
         <Reveal>
-          <div className="flex flex-col items-start justify-between gap-8 rounded-2xl border border-border bg-surface px-8 py-12 sm:px-12 lg:flex-row lg:items-center">
+          <div className="flex flex-col items-start justify-between gap-8 rounded-2xl bg-white px-8 py-12 shadow-soft sm:px-12 lg:flex-row lg:items-center">
             <div className="max-w-xl">
               <h2 className="display mb-4 text-[clamp(1.6rem,3vw,2.4rem)] text-foreground">
                 Not in a position to give?
@@ -201,7 +203,7 @@ export default function DonatePage() {
 
             <Link
               href="/#approach"
-              className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-7 py-4 text-sm font-semibold text-foreground transition-colors duration-300 hover:border-primary-light hover:text-primary-light"
+              className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-surface-2 px-7 py-4 text-sm font-semibold text-foreground transition-colors duration-300 hover:bg-primary-deep hover:text-white"
             >
               How the work is done
               <IconArrowUpRight

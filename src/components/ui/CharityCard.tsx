@@ -7,20 +7,22 @@ import type { Charity } from "@/data/charities";
  * Deliberately no logo and no partnership language: this demo points people at
  * real charities, it does not claim any relationship with them. The link prints
  * its destination hostname so nobody has to guess where their money is going.
+ *
+ * Separated from the page by elevation rather than a border.
  */
 export default function CharityCard({ charity }: { charity: Charity }) {
   const hostname = new URL(charity.donateUrl).hostname.replace(/^www\./, "");
 
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-7 transition-colors duration-500 hover:border-primary">
+    <article className="group flex h-full flex-col rounded-2xl bg-white p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
       <h3 className="display mb-2 text-xl text-foreground">{charity.name}</h3>
-      <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-faint">
+      <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-deep">
         {charity.legalName}
       </p>
 
       <p className="mb-6 flex-1 text-sm leading-relaxed text-muted">{charity.focus}</p>
 
-      <ul className="mb-7 space-y-2.5 border-t border-border pt-5 text-xs">
+      <ul className="mb-7 space-y-2.5 rounded-xl bg-surface p-4 text-xs">
         <li className="flex items-start gap-2.5 text-muted">
           <IconMapPin size={15} className="mt-0.5 shrink-0 text-primary" />
           <span>{charity.region}</span>
@@ -35,7 +37,7 @@ export default function CharityCard({ charity }: { charity: Charity }) {
         href={charity.donateUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-dark transition-transform duration-300 hover:scale-[1.02]"
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-primary-deep px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-glow transition-colors duration-300 hover:bg-primary"
       >
         Donate on their site
         <IconExternalLink size={16} />
