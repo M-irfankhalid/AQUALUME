@@ -1,5 +1,5 @@
 {
-  "name": "cornerstone-construction",
+  "name": "aqualume-foundation",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -21,6 +21,8 @@
     "clsx": "^2.1.1",
     "drei": "^2.2.21",
     "framer-motion": "^12.4.2",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26",
     "motion": "^12.0.6",
     "next": "^16.1.6",
     "react": "^18.3.1",

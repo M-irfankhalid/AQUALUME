@@ -1,27 +1,45 @@
 @import "tailwindcss";
 
-/* ===== Construction Company Color System (Tailwind v4 CSS config) ===== */
-@theme {
-  --font-sans: "Inter", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* ============================================================
+   Aqualume Foundation — deep-water design system
+   Tailwind v4: all configuration lives in this @theme block.
+   There is no tailwind.config.js and there must not be one.
+   ============================================================ */
 
-  /* Industrial amber / slate palette */
-  --color-primary: #ea580c;        /* safety orange */
-  --color-primary-hover: #c2410c;
-  --color-accent: #f59e0b;         /* amber */
-  --color-background: #ffffff;
-  --color-surface: #f8fafc;
-  --color-surface-2: #f1f5f9;
-  --color-foreground: #0f172a;
-  --color-muted: #64748b;
-  --color-border: #e2e8f0;
-  --color-border-hover: #cbd5e1;
-  --color-dark: #0f172a;           /* charcoal, for dark bands */
-  --color-dark-2: #1e293b;
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+
+  /* Depth scale — the site is entirely dark, so "dark" tones are the page itself */
+  --color-abyss: #020a09;
+  --color-background: #04120f;
+  --color-surface: #071c18;
+  --color-surface-2: #0a2721;
+
+  /* Type */
+  --color-foreground: #e9f6f3;
+  --color-muted: #7fa39c;
+  --color-faint: #4d6b66;
+
+  --color-border: #12352e;
+  --color-border-hover: #1d4c43;
+
+  /* Accents */
+  --color-primary: #14b8a6;
+  --color-primary-hover: #0d9488;
+  --color-primary-light: #5eead4;
+  --color-accent: #f59e0b;
+
+  --color-dark: #020a09;
+  --color-dark-2: #071c18;
 }
 
-/* ===== Base Styles ===== */
+/* ===== Base ===== */
 html {
-  scroll-behavior: smooth;
+  /* Lenis drives scrolling; native smooth-scroll would fight it. */
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -29,56 +47,165 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
   line-height: 1.6;
+  /* `clip`, not `hidden`. `overflow-x: hidden` forces overflow-y to compute to
+     `auto`, which makes <body> a scroll container and breaks `position: sticky`
+     on the Crisis section. `clip` contains the overflow without creating one. */
+  overflow-x: clip;
 }
 
-/* ===== Animations ===== */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-abyss);
+}
 
-/* Marquee for partner logos */
+/* Anchored sections must clear the fixed nav */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ===== Lenis =====
+   Required by the library: it sets .lenis on <html> while active. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ===== Display typography =====
+   The headline voice of the site: heavy, tightly tracked, optically aligned. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.display-tight {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ===== Reveal primitives =====
+   GSAP animates the inner span; the outer clip hides the travel. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.line-mask > span {
+  display: block;
+  will-change: transform;
+}
+
+/* ===== Grain =====
+   An animated film-grain layer. Generated, never an image file. */
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+.grain-layer {
+  animation: grain-shift 8s steps(10) infinite;
+}
+
+/* ===== Marquee ===== */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 24s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
-/* Floating accent */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* ===== Hairline rules ===== */
+.hairline {
+  border-color: var(--color-border);
 }
 
-/* ===== Scrollbar ===== */
-.scrollbar-thin {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-muted) transparent;
+/* ===== Custom cursor =====
+   The class is only ever added by Cursor.tsx, and only when a fine pointer is
+   present and reduced-motion is off — so the native cursor is never hidden on
+   a device that cannot show the replacement. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none;
 }
-.scrollbar-thin::-webkit-scrollbar {
-  width: 8px;
+
+/* ===== Scroll indicator ===== */
+@keyframes scroll-pulse {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
 }
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
-}
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: var(--color-muted);
-  border-radius: 4px;
-}
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-hover);
+.animate-scroll-pulse {
+  animation: scroll-pulse 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
 /* ===== Helpers ===== */
-.section {
-  @apply py-16 sm:py-20 md:py-24;
-}
-
 .container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
 
-.transition-smooth {
-  transition: all 0.3s ease;
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-inline: 4rem;
+  }
+}
+
+/* ===== Reduced motion =====
+   Everything decorative stops; nothing becomes unreadable. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain-layer {
+    animation: none;
+  }
 }
