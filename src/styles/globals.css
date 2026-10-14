@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* ===== Construction Company Color System (Tailwind v4 CSS config) ===== */
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Industrial amber / slate palette */
+  --color-primary: #ea580c;        /* safety orange */
+  --color-primary-hover: #c2410c;
+  --color-accent: #f59e0b;         /* amber */
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+  --color-surface-2: #f1f5f9;
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --color-dark: #0f172a;           /* charcoal, for dark bands */
+  --color-dark-2: #1e293b;
+}
+
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/* ===== Animations ===== */
+
+/* Marquee for partner logos */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+}
+
+/* Floating accent */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ===== Scrollbar ===== */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-muted) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* ===== Helpers ===== */
+.section {
+  @apply py-16 sm:py-20 md:py-24;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.transition-smooth {
+  transition: all 0.3s ease;
+}
